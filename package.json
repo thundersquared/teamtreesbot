@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "got": "^9.6.0",
+    "twitter": "^1.7.1"
+  },
+  "scripts": {
+    "start": "node bot"
+  },
+  "name": "teamtreesbot",
+  "version": "1.0.0",
+  "description": "Twitter Bot that posts trees planted by #TeamTrees",
+  "main": "bot.js",
+  "devDependencies": {},
+  "keywords": [
+    "twitter",
+    "bot",
+    "trees",
+    "got",
+    "teamtrees"
+  ],
+  "author": "thundersquared",
+  "license": "MIT"
+}
