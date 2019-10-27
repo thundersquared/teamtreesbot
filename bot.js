@@ -10,11 +10,11 @@ let client = new Twitter({
 })
 
 const readStats = () => {
-	return JSON.parse(fs.readFileSync('data/stats.json', 'utf8'))
+	return JSON.parse(fs.readFileSync('/data/stats.json', 'utf8'))
 }
 
 const writeStats = data => {
-	fs.writeFile('data/stats.json', JSON.stringify(data), 'utf8', err => {
+	fs.writeFile('/data/stats.json', JSON.stringify(data), 'utf8', err => {
 		if (err) {
 	        console.error(err)
 	    }
