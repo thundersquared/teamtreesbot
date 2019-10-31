@@ -2,6 +2,7 @@ const fs = require('fs')
 const got = require('got')
 const Twitter = require('twitter')
 
+// Twitter configuration
 let client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -9,10 +10,12 @@ let client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 })
 
+// Reads JSON from stats file and parses it
 const readStats = () => {
 	return JSON.parse(fs.readFileSync('/data/stats.json', 'utf8'))
 }
 
+// Write stringified JSON to stats file
 const writeStats = data => {
 	fs.writeFile('/data/stats.json', JSON.stringify(data), 'utf8', err => {
 		if (err) {
@@ -21,10 +24,12 @@ const writeStats = data => {
 	})
 }
 
+// Formats int with commas
 const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// Retrieves page and returns parsed body
 const fetch = async () => {
 	try {
 
@@ -40,6 +45,7 @@ const fetch = async () => {
 	}
 }
 
+// Searches trees counter in body, parses integer and rounds it
 const parse = body => {
 
 	// Get trees
@@ -54,8 +60,11 @@ const parse = body => {
 	return trees
 }
 
+// Tweets if trees are more than they were in the last check
 const tweet = (past, now) => {
 	if (past && past > 0 && now > past) {
+
+		// Format number from integer
 		let trees = numberWithCommas(now)
 
 		let tweets = [
@@ -68,14 +77,17 @@ const tweet = (past, now) => {
 			"TREESNUM+ 🌲 planted simply 'cause #TeamTrees makes $1 = 1 🌲\n\nSo, what about donating $1? https://teamtrees.org/"
 		]
 
+		// Choose random tweet template
 		let status = tweets[Math.floor(Math.random() * tweets.length)]
 
+		// Replace trees number in string
 		status = status.replace('TREESNUM', trees)
 
 		let data = {
 			status
 		}
 
+		// Tweet
 		client.post('statuses/update', data, (error, tweet, response) => {
 			if (error) {
 				console.error(tweet)
@@ -84,8 +96,12 @@ const tweet = (past, now) => {
 	}
 }
 
+// Updates bot description on uptime change
 const uptime = (past, now) => {
+
+	// Update only if there's a change
 	if (past !== now) {
+
 		let data = {
 			description: `Made by @squaredhq to keep you updated during the campaign.\n\nGo donate: https://teamtrees.org/\nGo #TeamTrees 🌱 and @MrBeastYT!\n\nSite is ${now} now.`
 		}
@@ -98,13 +114,18 @@ const uptime = (past, now) => {
 	}
 }
 
+// Main bot logic
 const run = async () => {
 
+	// Populate from last check
 	let data = readStats()
 
+	// Fetch new counter
 	let trees = await fetch()
 
+	// Check if still up
 	if (trees > 0) {
+
 		// Process Twitter
 		tweet(data.trees, trees)
 		uptime(data.status, 'up')
@@ -112,12 +133,15 @@ const run = async () => {
 		// Update stats
 		data.trees = trees
 		data.status = 'up'
+
 	} else {
+
 		// Update downtme
 		uptime(data.status, 'down')
 
 		// Update stats
 		data.status = 'down'
+
 	}
 
 	// Write to file
@@ -125,6 +149,7 @@ const run = async () => {
 
 }
 
+// Main thread launching login function every minute
 const poll = () => {
 	setInterval(run, 60 * 1000)
 }

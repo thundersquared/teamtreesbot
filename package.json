@@ -7,7 +7,7 @@
     "start": "node bot"
   },
   "name": "teamtreesbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Twitter Bot that posts trees planted by #TeamTrees",
   "main": "bot.js",
   "devDependencies": {},
