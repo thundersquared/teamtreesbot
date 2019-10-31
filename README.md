@@ -25,5 +25,13 @@ teamtreesbot is a bot that tweets updated about the goal of the campagin, every 
    yarn dev
    ```
 
+## Config vars
+| Block                       | Required |
+| --------------------------- | -------- |
+| TWITTER_CONSUMER_KEY        | Yes      |
+| TWITTER_CONSUMER_SECRET     | Yes      |
+| TWITTER_ACCESS_TOKEN_KEY    | Yes      |
+| TWITTER_ACCESS_TOKEN_SECRET | Yes      |
+
 ## License
 The code in this repo and used modules are open-sourced software licensed under the [MIT license](LICENSE.md).
