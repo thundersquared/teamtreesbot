@@ -61,6 +61,9 @@ const tweet = (past, now) => {
 		let tweets = [
 			"Did you know TREESNUM+ trees have been planted?\n\nGo #TeamTrees 🌱\nGo donate: https://teamtrees.org/",
 			"Where could you possibly put TREESNUM+ trees?\nThink about that and go donate to #TeamTrees: https://teamtrees.org/",
+			"You HAVE to check this out. #TeamTrees planted over TREESNUM trees! THAT'S INSANE!\nWanna help? https://teamtrees.org/",
+			"🌲🌲🌲\nTREE ALERT!\n🌲🌲🌲\nOver TREESNUM+ trees were planted by #TeamTrees. Don't you simply wanna help? https://teamtrees.org/",
+			"Over TREESNUM+ trees were planted by Treelon, Jack and Susan.\nAre you groot enought to donate? #TeamTrees https://teamtrees.org/",
 			"TREESNUM+ 🌲 planted simply 'cause #TeamTrees makes $1 = 1 🌲\n\nSo, what about donating $1? https://teamtrees.org/"
 		]
 
