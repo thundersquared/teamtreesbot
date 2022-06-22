@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "twitter": "^1.7.1"
   },
   "scripts": {
